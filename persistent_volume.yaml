@@ -1,0 +1,13 @@
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: cloud-pv
+spec:
+  capacity:
+    storage: 10Gi  # Define storage capacity
+  accessModes:
+    - ReadWriteOnce  # Allow single node to read/write
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/mnt/data"  # Path on the host where data will be stored

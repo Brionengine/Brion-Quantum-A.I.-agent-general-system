@@ -1,0 +1,13 @@
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: cloud-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cloud-deployment
+  minReplicas: 2  # Minimum number of replicas
+  maxReplicas: 10  # Maximum number of replicas
+  targetCPUUtilizationPercentage: 75  # Target CPU utilization

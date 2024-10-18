@@ -1,0 +1,7 @@
+
+# Add necessary dependencies for Cloud
+boto3
+dask
+psutil
+matplotlib
+scikit-learn
