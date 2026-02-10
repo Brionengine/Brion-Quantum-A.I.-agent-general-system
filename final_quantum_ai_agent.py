@@ -69,7 +69,7 @@ class FinalQuantumAIAgent:
     - Performance analytics and health monitoring
     """
 
-    VERSION = "2.0.0"
+    VERSION = "2.1.22"
 
     def __init__(self):
         self.nlp = NLPInterface()
