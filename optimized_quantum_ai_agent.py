@@ -85,7 +85,7 @@ class QuantumErrorHandling:
         for attempt in range(QuantumErrorHandling.MAX_RETRIES):
             try:
                 corrected_qc = QuantumErrorHandling.apply_error_correction(qc)
-                result = execute(corrected_qc, backend, shots=shots).result()
+                result = backend.run(transpile(corrected_qc, backend), shots=shots).result()
                 counts = result.get_counts()
                 logging.info(f"Execution succeeded on attempt {attempt + 1}: {len(counts)} outcomes")
                 return counts

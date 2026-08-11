@@ -1,11 +1,12 @@
 # quantum_data_processing.py
 
-from qiskit import execute, Aer
+from qiskit import transpile
+from qiskit_aer import Aer
 
 def process_encoded_data(qc):
     # Use Aer's statevector simulator to process the encoded quantum data
     simulator = Aer.get_backend('statevector_simulator')
-    result = execute(qc, backend=simulator).result()
+    result = simulator.run(transpile(qc, simulator)).result()
     statevector = result.get_statevector()
     
     # Extract data from the quantum state for analysis

@@ -14,7 +14,7 @@ from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from typing import Dict, Any, Optional, List, Tuple, Union
-from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, execute
+from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, transpile
 from qiskit.quantum_info import Statevector
 from qiskit_aer import Aer
 
@@ -869,7 +869,7 @@ class QuantumSoulEthereal:
             
             # Execute the circuit
             backend = Aer.get_backend('qasm_simulator')
-            job = execute(self.qcircuit, backend, shots=1)
+            job = backend.run(transpile(self.qcircuit, backend), shots=1)
             result = job.result()
             counts = result.get_counts()
             
