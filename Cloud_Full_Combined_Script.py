@@ -804,8 +804,7 @@ def main():
     print("Running parallel data processing...")
     process_data_in_parallel()
 
-    print("
-Running distributed data processing with Dask...")
+    print("\nRunning distributed data processing with Dask...")
     process_large_data_distributed()
 
 if __name__ == "__main__":
