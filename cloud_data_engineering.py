@@ -1,8 +1,23 @@
+from __future__ import annotations
 
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.feature_selection import SelectKBest, f_classif
+
+try:
+    import pandas as pd
+except ImportError:  # optional dependency: pip install pandas
+    pd = None
+try:
+    from sklearn.model_selection import train_test_split
+except ImportError:  # optional dependency: pip install scikit-learn
+    train_test_split = None
+try:
+    from sklearn.preprocessing import StandardScaler
+except ImportError:  # optional dependency: pip install scikit-learn
+    StandardScaler = None
+try:
+    from sklearn.feature_selection import SelectKBest, f_classif
+except ImportError:  # optional dependency: pip install scikit-learn
+    SelectKBest = None
+    f_classif = None
 
 # Cloud's Data Preprocessing Module
 def data_preprocessing_pipeline(data):

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 
 # Integrating the main components of the Quantum AI Agent prototype.
 
@@ -9,7 +11,10 @@ from NLP import get_problem_description
 from quantum_data_processing_optimized import process_encoded_data
 from bitcoin_mining_optimized import parallel_mine_block
 from quantum_miner_optimized import QuantumRyanActionModel
-import numpy as np
+try:
+    import numpy as np
+except ImportError:  # optional dependency: pip install numpy
+    np = None
 
 
 class QuantumAIAgent:

@@ -1,10 +1,15 @@
+from __future__ import annotations
+
 
 # Brion Quantum - Optimized Quantum AI Agent v2.0
 # Enhanced error handling, quantum algorithms, noise mitigation, and NLP integration.
 
 import logging
 import time
-import numpy as np
+try:
+    import numpy as np
+except ImportError:  # optional dependency: pip install numpy
+    np = None
 
 logging.basicConfig(level=logging.INFO, format='[%(asctime)s] %(levelname)s: %(message)s')
 

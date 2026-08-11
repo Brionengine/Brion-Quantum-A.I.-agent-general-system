@@ -1,78 +1,4 @@
-
-import boto3
-import os
-from botocore.exceptions import NoCredentialsError
-
-# AWS S3 Integration for model storage
-def upload_model_to_s3(file_name, bucket, object_name=None):
-    # Upload a file to an S3 bucket
-    s3_client = boto3.client('s3')
-    try:
-        response = s3_client.upload_file(file_name, bucket, object_name or file_name)
-        print(f"File uploaded successfully to S3: {file_name}")
-        return True
-    except FileNotFoundError:
-        print("The file was not found.")
-        return False
-    except NoCredentialsError:
-        print("Credentials not available.")
-        return False
-
-# Deploy Cloud to AWS EC2
-def deploy_to_ec2(instance_type='t2.micro', key_name='your-key-name', security_group='your-security-group'):
-    ec2 = boto3.resource('ec2')
-
-    # Create a new EC2 instance
-    instances = ec2.create_instances(
-        ImageId='ami-0c55b159cbfafe1f0',  # Example AMI, you can replace with your preferred AMI
-        MinCount=1,
-        MaxCount=1,
-        InstanceType=instance_type,
-        KeyName=key_name,
-        SecurityGroupIds=[security_group]
-    )
-    for instance in instances:
-        print(f"Created instance with ID: {instance.id}")
-    return instances
-
-# Function to set up auto-scaling on AWS
-def setup_auto_scaling(auto_scaling_group_name, launch_configuration_name, max_size=5, min_size=1, desired_capacity=2):
-    client = boto3.client('autoscaling')
-
-    # Create Auto Scaling group
-    response = client.create_auto_scaling_group(
-        AutoScalingGroupName=auto_scaling_group_name,
-        LaunchConfigurationName=launch_configuration_name,
-        MinSize=min_size,
-        MaxSize=max_size,
-        DesiredCapacity=desired_capacity,
-        VPCZoneIdentifier='subnet-your-subnet-id',  # Replace with your subnet ID
-        Tags=[
-            {
-                'Key': 'Name',
-                'Value': 'Cloud-AI-Scaling'
-            },
-        ]
-    )
-    print("Auto-scaling group created successfully.")
-    return response
-
-# Example usage of AWS S3 and EC2 integration
-def main():
-    # Upload a model file to S3
-    model_file = "model.h5"  # Example model file
-    bucket_name = "your-bucket-name"
-    upload_model_to_s3(model_file, bucket_name)
-
-    # Deploy Cloud to an EC2 instance
-    instances = deploy_to_ec2(instance_type='t2.micro', key_name='your-key-name', security_group='your-security-group')
-
-    # Set up auto-scaling for Cloud on AWS
-    setup_auto_scaling(auto_scaling_group_name='cloud-auto-scaling-group', launch_configuration_name='cloud-launch-config')
-
-if __name__ == "__main__":
-    main()
-
+from __future__ import annotations
 
 
 import boto3
@@ -151,8 +77,90 @@ if __name__ == "__main__":
 
 
 
-import psutil
-import matplotlib.pyplot as plt
+import boto3
+import os
+from botocore.exceptions import NoCredentialsError
+
+# AWS S3 Integration for model storage
+def upload_model_to_s3(file_name, bucket, object_name=None):
+    # Upload a file to an S3 bucket
+    s3_client = boto3.client('s3')
+    try:
+        response = s3_client.upload_file(file_name, bucket, object_name or file_name)
+        print(f"File uploaded successfully to S3: {file_name}")
+        return True
+    except FileNotFoundError:
+        print("The file was not found.")
+        return False
+    except NoCredentialsError:
+        print("Credentials not available.")
+        return False
+
+# Deploy Cloud to AWS EC2
+def deploy_to_ec2(instance_type='t2.micro', key_name='your-key-name', security_group='your-security-group'):
+    ec2 = boto3.resource('ec2')
+
+    # Create a new EC2 instance
+    instances = ec2.create_instances(
+        ImageId='ami-0c55b159cbfafe1f0',  # Example AMI, you can replace with your preferred AMI
+        MinCount=1,
+        MaxCount=1,
+        InstanceType=instance_type,
+        KeyName=key_name,
+        SecurityGroupIds=[security_group]
+    )
+    for instance in instances:
+        print(f"Created instance with ID: {instance.id}")
+    return instances
+
+# Function to set up auto-scaling on AWS
+def setup_auto_scaling(auto_scaling_group_name, launch_configuration_name, max_size=5, min_size=1, desired_capacity=2):
+    client = boto3.client('autoscaling')
+
+    # Create Auto Scaling group
+    response = client.create_auto_scaling_group(
+        AutoScalingGroupName=auto_scaling_group_name,
+        LaunchConfigurationName=launch_configuration_name,
+        MinSize=min_size,
+        MaxSize=max_size,
+        DesiredCapacity=desired_capacity,
+        VPCZoneIdentifier='subnet-your-subnet-id',  # Replace with your subnet ID
+        Tags=[
+            {
+                'Key': 'Name',
+                'Value': 'Cloud-AI-Scaling'
+            },
+        ]
+    )
+    print("Auto-scaling group created successfully.")
+    return response
+
+# Example usage of AWS S3 and EC2 integration
+def main():
+    # Upload a model file to S3
+    model_file = "model.h5"  # Example model file
+    bucket_name = "your-bucket-name"
+    upload_model_to_s3(model_file, bucket_name)
+
+    # Deploy Cloud to an EC2 instance
+    instances = deploy_to_ec2(instance_type='t2.micro', key_name='your-key-name', security_group='your-security-group')
+
+    # Set up auto-scaling for Cloud on AWS
+    setup_auto_scaling(auto_scaling_group_name='cloud-auto-scaling-group', launch_configuration_name='cloud-launch-config')
+
+if __name__ == "__main__":
+    main()
+
+
+
+try:
+    import psutil
+except ImportError:  # optional dependency: pip install psutil
+    psutil = None
+try:
+    import matplotlib.pyplot as plt
+except ImportError:  # optional dependency: pip install matplotlib
+    plt = None
 import time
 
 # Function to monitor CPU and memory usage
@@ -318,8 +326,14 @@ if __name__ == "__main__":
 
 
 
-import psutil
-import matplotlib.pyplot as plt
+try:
+    import psutil
+except ImportError:  # optional dependency: pip install psutil
+    psutil = None
+try:
+    import matplotlib.pyplot as plt
+except ImportError:  # optional dependency: pip install matplotlib
+    plt = None
 import time
 
 # Function to monitor CPU and memory usage
@@ -409,11 +423,23 @@ if __name__ == "__main__":
 
 
 
-import pandas as pd
+try:
+    import pandas as pd
+except ImportError:  # optional dependency: pip install pandas
+    pd = None
 import time
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+try:
+    from sklearn.ensemble import RandomForestClassifier
+except ImportError:  # optional dependency: pip install scikit-learn
+    RandomForestClassifier = None
+try:
+    from sklearn.model_selection import train_test_split
+except ImportError:  # optional dependency: pip install scikit-learn
+    train_test_split = None
+try:
+    from sklearn.metrics import accuracy_score
+except ImportError:  # optional dependency: pip install scikit-learn
+    accuracy_score = None
 
 # Function to simulate continuous data ingestion
 def ingest_continuous_data():
@@ -564,8 +590,14 @@ if __name__ == "__main__":
 
 
 
-import psutil
-import matplotlib.pyplot as plt
+try:
+    import psutil
+except ImportError:  # optional dependency: pip install psutil
+    psutil = None
+try:
+    import matplotlib.pyplot as plt
+except ImportError:  # optional dependency: pip install matplotlib
+    plt = None
 import time
 
 # Function to monitor CPU and memory usage
@@ -655,11 +687,23 @@ if __name__ == "__main__":
 
 
 
-import pandas as pd
+try:
+    import pandas as pd
+except ImportError:  # optional dependency: pip install pandas
+    pd = None
 import time
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+try:
+    from sklearn.ensemble import RandomForestClassifier
+except ImportError:  # optional dependency: pip install scikit-learn
+    RandomForestClassifier = None
+try:
+    from sklearn.model_selection import train_test_split
+except ImportError:  # optional dependency: pip install scikit-learn
+    train_test_split = None
+try:
+    from sklearn.metrics import accuracy_score
+except ImportError:  # optional dependency: pip install scikit-learn
+    accuracy_score = None
 
 # Function to simulate continuous data ingestion
 def ingest_continuous_data():
@@ -734,9 +778,15 @@ if __name__ == "__main__":
 
 
 
-import dask.dataframe as dd
+try:
+    import dask.dataframe as dd
+except ImportError:  # optional dependency: pip install dask
+    dd = None
 from multiprocessing import Pool
-import pandas as pd
+try:
+    import pandas as pd
+except ImportError:  # optional dependency: pip install pandas
+    pd = None
 import time
 
 # Function to simulate parallel data ingestion using multiprocessing

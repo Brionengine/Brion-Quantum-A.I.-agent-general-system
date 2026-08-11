@@ -1,9 +1,23 @@
+from __future__ import annotations
 
-import pandas as pd
+
+try:
+    import pandas as pd
+except ImportError:  # optional dependency: pip install pandas
+    pd = None
 import time
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import StandardScaler
-import psutil  # For monitoring CPU usage
+try:
+    from sklearn.ensemble import RandomForestClassifier
+except ImportError:  # optional dependency: pip install scikit-learn
+    RandomForestClassifier = None
+try:
+    from sklearn.preprocessing import StandardScaler
+except ImportError:  # optional dependency: pip install scikit-learn
+    StandardScaler = None
+try:
+    import psutil  # For monitoring CPU usage
+except ImportError:  # optional dependency: pip install psutil
+    psutil = None
 
 # Function to simulate continuous data stream ingestion (real-time deployment)
 def ingest_real_time_data():

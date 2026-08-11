@@ -1,10 +1,31 @@
+from __future__ import annotations
 
-import pandas as pd
-from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.metrics import accuracy_score
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.neural_network import MLPClassifier
+
+try:
+    import pandas as pd
+except ImportError:  # optional dependency: pip install pandas
+    pd = None
+try:
+    from sklearn.model_selection import train_test_split, GridSearchCV
+except ImportError:  # optional dependency: pip install scikit-learn
+    train_test_split = None
+    GridSearchCV = None
+try:
+    from sklearn.metrics import accuracy_score
+except ImportError:  # optional dependency: pip install scikit-learn
+    accuracy_score = None
+try:
+    from sklearn.ensemble import RandomForestClassifier
+except ImportError:  # optional dependency: pip install scikit-learn
+    RandomForestClassifier = None
+try:
+    from sklearn.tree import DecisionTreeClassifier
+except ImportError:  # optional dependency: pip install scikit-learn
+    DecisionTreeClassifier = None
+try:
+    from sklearn.neural_network import MLPClassifier
+except ImportError:  # optional dependency: pip install scikit-learn
+    MLPClassifier = None
 
 # Cloud's Automated Machine Learning (AutoML) Pipeline
 def auto_ml_pipeline(X, y):

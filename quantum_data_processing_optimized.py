@@ -1,7 +1,15 @@
 # quantum_data_processing.py
+from __future__ import annotations
 
-from qiskit import transpile
-from qiskit_aer import Aer
+
+try:
+    from qiskit import transpile
+except ImportError:  # optional dependency: pip install qiskit
+    transpile = None
+try:
+    from qiskit_aer import Aer
+except ImportError:  # optional dependency: pip install qiskit-aer
+    Aer = None
 
 def process_encoded_data(qc):
     # Use Aer's statevector simulator to process the encoded quantum data

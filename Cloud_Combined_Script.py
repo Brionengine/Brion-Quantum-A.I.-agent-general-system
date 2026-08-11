@@ -1,9 +1,23 @@
+from __future__ import annotations
 
-import pandas as pd
+
+try:
+    import pandas as pd
+except ImportError:  # optional dependency: pip install pandas
+    pd = None
 import time
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-from sklearn.ensemble import RandomForestClassifier
+try:
+    from sklearn.model_selection import train_test_split
+except ImportError:  # optional dependency: pip install scikit-learn
+    train_test_split = None
+try:
+    from sklearn.metrics import accuracy_score
+except ImportError:  # optional dependency: pip install scikit-learn
+    accuracy_score = None
+try:
+    from sklearn.ensemble import RandomForestClassifier
+except ImportError:  # optional dependency: pip install scikit-learn
+    RandomForestClassifier = None
 
 # Cloud's model retraining function
 def retrain_model(data, model):
@@ -76,11 +90,23 @@ monitor_model_performance(0.92)  # Simulated example
 
 
 
-import pandas as pd
+try:
+    import pandas as pd
+except ImportError:  # optional dependency: pip install pandas
+    pd = None
 import time
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-from sklearn.ensemble import RandomForestClassifier
+try:
+    from sklearn.model_selection import train_test_split
+except ImportError:  # optional dependency: pip install scikit-learn
+    train_test_split = None
+try:
+    from sklearn.metrics import accuracy_score
+except ImportError:  # optional dependency: pip install scikit-learn
+    accuracy_score = None
+try:
+    from sklearn.ensemble import RandomForestClassifier
+except ImportError:  # optional dependency: pip install scikit-learn
+    RandomForestClassifier = None
 
 # Cloud's model retraining function
 def retrain_model(data, model):
@@ -153,7 +179,10 @@ monitor_model_performance(0.92)  # Simulated example
 
 
 
-import matplotlib.pyplot as plt
+try:
+    import matplotlib.pyplot as plt
+except ImportError:  # optional dependency: pip install matplotlib
+    plt = None
 import time
 import random
 
@@ -196,11 +225,23 @@ if __name__ == "__main__":
 
 
 
-import pandas as pd
+try:
+    import pandas as pd
+except ImportError:  # optional dependency: pip install pandas
+    pd = None
 import time
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-from sklearn.ensemble import RandomForestClassifier
+try:
+    from sklearn.model_selection import train_test_split
+except ImportError:  # optional dependency: pip install scikit-learn
+    train_test_split = None
+try:
+    from sklearn.metrics import accuracy_score
+except ImportError:  # optional dependency: pip install scikit-learn
+    accuracy_score = None
+try:
+    from sklearn.ensemble import RandomForestClassifier
+except ImportError:  # optional dependency: pip install scikit-learn
+    RandomForestClassifier = None
 
 # Cloud's model retraining function
 def retrain_model(data, model):
@@ -273,7 +314,10 @@ monitor_model_performance(0.92)  # Simulated example
 
 
 
-import matplotlib.pyplot as plt
+try:
+    import matplotlib.pyplot as plt
+except ImportError:  # optional dependency: pip install matplotlib
+    plt = None
 import time
 import random
 
@@ -316,9 +360,18 @@ if __name__ == "__main__":
 
 
 
-import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import StandardScaler
+try:
+    import pandas as pd
+except ImportError:  # optional dependency: pip install pandas
+    pd = None
+try:
+    from sklearn.ensemble import RandomForestClassifier
+except ImportError:  # optional dependency: pip install scikit-learn
+    RandomForestClassifier = None
+try:
+    from sklearn.preprocessing import StandardScaler
+except ImportError:  # optional dependency: pip install scikit-learn
+    StandardScaler = None
 
 # Function to simulate live data ingestion
 def ingest_live_data():

@@ -1,7 +1,12 @@
+from __future__ import annotations
+
 from keras.models import Sequential, load_model
 from keras.layers import Dense
 from keras.optimizers import Adam
-import numpy as np
+try:
+    import numpy as np
+except ImportError:  # optional dependency: pip install numpy
+    np = None
 import random
 from collections import deque
 import logging

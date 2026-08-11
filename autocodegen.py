@@ -1,6 +1,12 @@
 # autocodegen.py
+from __future__ import annotations
 
-from transformers import GPT2Tokenizer, GPT2LMHeadModel
+
+try:
+    from transformers import GPT2Tokenizer, GPT2LMHeadModel
+except ImportError:  # optional dependency: pip install transformers
+    GPT2Tokenizer = None
+    GPT2LMHeadModel = None
 
 def generate_code_from_description(problem_desc):
     """

@@ -1,10 +1,21 @@
 # quantum_algorithms.py
 # Brion Quantum - Advanced Quantum Algorithm Library v2.0
 # Supports: Grover's Search, VQE, QAOA, QFT, Quantum Entanglement, Bell States
+from __future__ import annotations
 
-import numpy as np
-from qiskit import QuantumCircuit
-import cirq
+
+try:
+    import numpy as np
+except ImportError:  # optional dependency: pip install numpy
+    np = None
+try:
+    from qiskit import QuantumCircuit
+except ImportError:  # optional dependency: pip install qiskit
+    QuantumCircuit = None
+try:
+    import cirq
+except ImportError:  # optional dependency: pip install cirq
+    cirq = None
 
 
 # ============================================================================

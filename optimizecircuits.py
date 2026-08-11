@@ -1,7 +1,16 @@
 # optimizecircuits.py
+from __future__ import annotations
 
-from qiskit.transpiler import PassManager
-from qiskit.transpiler.passes import Optimize1qGates, CommutativeCancellation
+
+try:
+    from qiskit.transpiler import PassManager
+except ImportError:  # optional dependency: pip install qiskit
+    PassManager = None
+try:
+    from qiskit.transpiler.passes import Optimize1qGates, CommutativeCancellation
+except ImportError:  # optional dependency: pip install qiskit
+    Optimize1qGates = None
+    CommutativeCancellation = None
 
 def optimize_qiskit_circuit(qc):
     """
